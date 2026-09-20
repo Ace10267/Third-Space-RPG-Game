@@ -5,15 +5,18 @@ public class character {
     private int maxHp = 20;
     private int hp = maxHp;
     private double maxInstability = 100;
-    private double instability = maxInstability;
+    private double instability = 0;
     private int parryStacks = 0;
     private boolean isAlive = true;
-    private boolean isUnstable;
+    private boolean isUnstable = false;
 
 
     //getters 
     public boolean isAlive() {
         return isAlive;
+    }
+    public boolean getIsUnstable(){
+        return isUnstable;
     }
     public int getMaxHp() {
         return maxHp;
@@ -21,7 +24,7 @@ public class character {
     public int getHp() {
         return hp;
     }
-    public double  getInstability() {
+    public double getInstability() {
         return instability;
     }
     public double getMaxInstability() {
@@ -107,5 +110,10 @@ public class character {
         this.isAlive = isAlive;
     }
 
-
+    public void CharReset(){
+        setIsAlive(true);
+        setParryStacks(0);
+        setInstability(0);
+        setHp(maxHp);
+    }
 }

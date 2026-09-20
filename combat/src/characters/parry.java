@@ -3,8 +3,18 @@ package characters;
 public class parry extends character{
 
     private boolean isParrying = false; 
-    private boolean justSucecessfulParried;
-    private boolean justUnsuccessfulParried;
+    private boolean justSucecessfulParried = false;
+    private boolean justUnsuccessfulParried = false;
+
+    public boolean getIsParrying(){
+        return isParrying; 
+    }
+    public boolean getJustSucecessfulParried(){
+        return justSucecessfulParried;
+    }
+    public boolean getJustSucessfulParried(){
+        return justSucecessfulParried;
+    }
 
     public void successfulParry(){
         addParryStacks(1);
@@ -28,5 +38,9 @@ public class parry extends character{
         justUnsuccessfulParried = true;
     }
 
-
+    public void ParryReset(){
+        isParrying = false;
+        justUnsuccessfulParried = false;
+        justSucecessfulParried = false;
+    }
 }

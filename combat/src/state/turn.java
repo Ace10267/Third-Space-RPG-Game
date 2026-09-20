@@ -1,3 +1,4 @@
+package state;
 public class turn {
 
     private boolean isPlayerTurn;
@@ -31,3 +32,4 @@ public class turn {
         this.turnCharEnemy = turnCharEnemy;
     }
 }
+
