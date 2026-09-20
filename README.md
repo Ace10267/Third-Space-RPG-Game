@@ -1,2 +1,2 @@
-# Third-Space-RPG-Game
-third.space project
+# RPG-Game
+Third Space RPG Game
