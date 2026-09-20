@@ -1,6 +1,8 @@
 package attacks;
 
-public class attack{
+import enemies.Enemy;
+
+public class Attack{
 
     private int damage;
     private String type;
@@ -28,10 +30,19 @@ public class attack{
         this.type = type; 
     }
 
+
+    public void attackHitEnemy(Attack attack, Enemy enemy){
+        int damage = attack.getDamage();
+        int enrage = attack.getEnrage();
+        enemy.removeHp(damage);
+        enemy.addEnrage(enrage);
+    }
+
+
     //constructor
-    public attack(int damage, String type, int damage){
+    public Attack(int damage, String type, int enrage){
         this.damage = damage;
         this.type = type;
-        this.damage = damage; 
+        this.enrage = enrage; 
     }
 }

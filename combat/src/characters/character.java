@@ -1,9 +1,10 @@
 package characters;
-public class character {
+public class Character{
 
 
 //#region basic char
     //attributes 
+
     private int charHp = 20;
     private int hp = charHp;
     private double charInstability = 100;
@@ -14,8 +15,17 @@ public class character {
     private int charSpeed;
     private int speed = charSpeed; 
     private boolean justHit = false;
+    private int maxEnrage;
+    private int enrage = 0;
+    private boolean isEnraged = false;
 
     //getters 
+    public int getMaxEnrage(){
+        return maxEnrage;
+    }
+    public int getEnrage(){
+        return enrage;
+    }
     public boolean getJustHit(){
         return justHit;
     }
@@ -31,7 +41,6 @@ public class character {
     public int getHp() {
         return hp;
     }
-
     public double getInstability() {
         return instability;
     }
@@ -47,8 +56,24 @@ public class character {
     public int getSpeed(){
         return speed;
     }
-
-    //setters 
+    public void setEnrage(int enrage){
+        this.enrage = enrage;
+        if (enrage >= maxEnrage){
+            isEnraged = true;
+        }
+    }
+    public void addEnrage(int enrage){
+        this.enrage += enrage;
+        if (enrage >= maxEnrage){
+            isEnraged = true;
+        }
+    }    
+    public void removeEnrage(int enrage){
+        this.enrage -= enrage;
+        if (enrage >= maxEnrage){
+            isEnraged = true;
+        }
+    }       
     public void setJustHit(boolean justHit){
         this.justHit = justHit;
     }
@@ -146,13 +171,6 @@ public class character {
             this.isUnstable = false;
         }
     }
-   public character(){}
-   
-    public character(int charHp, int charSpeed, int charInstabilty){
-        this.charHp = charHp;
-        this.charSpeed = charSpeed;
-        this.charInstability = charInstabilty;
-    }
     //reset
     public void charReset(){
         setIsAlive(true);
@@ -165,9 +183,9 @@ public class character {
 //#endregion
 
 
-//#region attack char
+//#region parrying
     private boolean isParrying = false; 
-    private boolean justSucecessfulParried = false;
+    private boolean justSucceessfulParried = false;
     private boolean justUnsuccessfulParried = false;
 
     //getters
@@ -175,10 +193,10 @@ public class character {
         return isParrying; 
     }
     public boolean getJustSucecessfulParried(){
-        return justSucecessfulParried;
+        return justSucceessfulParried;
     }
-    public boolean getJustSucessfulParried(){
-        return justSucecessfulParried;
+    public boolean justUnsuccessfulParried(){
+        return justUnsuccessfulParried;
     }
 
     //can you parry
@@ -201,14 +219,14 @@ public class character {
         setInstability(instability);
         addParryStacks(1);
 
-        boolean isParrying = false;
-        boolean justSuccessfulParried = true;
+        isParrying = false;
+        justSucceessfulParried = true;
     }
 
     public void unsuccesfulParry(){
         double instability = getInstability() + 20;
         addInstability(instability);
-        boolean isParrying = false; 
+        isParrying = false; 
         justUnsuccessfulParried = true;
         
     }
@@ -220,13 +238,13 @@ public class character {
     public void parryReset(){
         isParrying = false;
         justUnsuccessfulParried = false;
-        justSucecessfulParried = false;
+        justSucceessfulParried = false;
     }
 
     //#endregion
 
 
-//#region defense char
+//#region counterattacking
     private boolean isCountering = false;
     private boolean justCountered = false;
  
@@ -262,6 +280,18 @@ public class character {
         justCountered = false;
     }
 //#endregion
+    
+ //default constructor for testing
+   public Character(){}
+   
 
+    public Character(int charHp, int charSpeed, int charInstabilty){
+        this.charHp = charHp;
+        this.charSpeed = charSpeed;
+        this.charInstability = charInstabilty;
+        this.maxEnrage = 100;
+    }
 
+    
+    
 }
