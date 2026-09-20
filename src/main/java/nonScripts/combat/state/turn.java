@@ -1,4 +1,4 @@
-package combat.state;
+package nonScripts.combat.state;
 public class turn {
 
     private boolean isPlayerTurn;

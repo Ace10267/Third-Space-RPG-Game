@@ -1,4 +1,4 @@
-package combat.characters;
+package nonScripts.combat.characters;
 
 public class Protagonist extends Character {
     

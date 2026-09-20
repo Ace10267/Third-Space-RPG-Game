@@ -1,4 +1,4 @@
-package combat.attacks;
+package nonScripts.combat.attacks;
 
 import java.util.ArrayList;
 
