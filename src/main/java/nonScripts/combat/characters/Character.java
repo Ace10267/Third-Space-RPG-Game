@@ -5,7 +5,9 @@ public class Character{
 //#region basic char
     //attributes 
 
+    //charHp represents the default max, can be upgraded through skill points
     private int charHp = 20;
+    //hp represents the hp is the battle itself, can go above max through buffs
     private int hp = charHp;
     private double charInstability = 100;
     private double instability = 0;
@@ -18,8 +20,12 @@ public class Character{
     private int maxEnrage;
     private int enrage = 0;
     private boolean isEnraged = false;
+    private boolean isPermadead = false;
 
     //getters 
+    public boolean getIsPermadead(){
+        return isPermadead;
+    }
     public int getMaxEnrage(){
         return maxEnrage;
     }
@@ -55,6 +61,9 @@ public class Character{
     }
     public int getSpeed(){
         return speed;
+    }
+    public void setIsPermadead(boolean death){
+        isPermadead = death;
     }
     public void setEnrage(int enrage){
         this.enrage = enrage;
