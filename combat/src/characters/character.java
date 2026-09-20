@@ -1,34 +1,42 @@
 package characters;
 public class character {
 
+
+//#region basic char
     //attributes 
-    private int maxHp = 20;
-    private int hp = maxHp;
-    private double maxInstability = 100;
+    private int charHp = 20;
+    private int hp = charHp;
+    private double charInstability = 100;
     private double instability = 0;
     private int parryStacks = 0;
     private boolean isAlive = true;
     private boolean isUnstable = false;
-
+    private int charSpeed;
+    private int speed = charSpeed; 
+    private boolean justHit = false;
 
     //getters 
+    public boolean getJustHit(){
+        return justHit;
+    }
     public boolean isAlive() {
         return isAlive;
     }
     public boolean getIsUnstable(){
         return isUnstable;
     }
-    public int getMaxHp() {
-        return maxHp;
+    public int getCharHp() {
+        return charHp;
     }
     public int getHp() {
         return hp;
     }
+
     public double getInstability() {
         return instability;
     }
-    public double getMaxInstability() {
-        return maxInstability;
+    public double getCharInstability() {
+        return charInstability;
     }
     public int getParryStacks() {
         return parryStacks;
@@ -36,18 +44,21 @@ public class character {
     public boolean isUnstable() {
         return isUnstable;
     }
+    public int getSpeed(){
+        return speed;
+    }
 
     //setters 
-    public void setMaxHp(int maxHp) {
-        this.maxHp = maxHp;
+    public void setJustHit(boolean justHit){
+        this.justHit = justHit;
+    }
+    public void setCharHp(int charHp) {
+        this.charHp = charHp;
     }
     public void setHp(int hp) {
         this.hp = hp;
         if (this.hp <= 0) {
             isAlive = false;
-        }
-        if (this.hp > maxHp) {
-            this.hp = maxHp;
         }
     }
     public void removeHp(int hp) {
@@ -58,17 +69,59 @@ public class character {
     }
     public void addHp(int hp) {
         this.hp += hp;
-        if (this.hp > maxHp) {
-            this.hp = maxHp;
+    }
+
+
+    public void setCharSpeed(int charSpeed) {
+        this.charSpeed = charSpeed;
+    }
+    public void addCharSpeed(int speed){
+        charSpeed += speed;
+    }
+    public void addSpeed(int speed){
+        this.speed += speed;
+    }
+    public void removeSpeed(int speed){
+        this.speed -= speed;
+    }
+    public void setSpeed(int speed){
+        this.speed = speed;
+    }
+
+
+
+
+    public void setParryStacks(int parryStacks) {
+        this.parryStacks = parryStacks;
+    }
+    public void addParryStacks(int parryStacks) {
+        this.parryStacks += parryStacks;
+    }
+    public void removeParryStacks(int parryStacks){
+        this.parryStacks = parryStacks;
+        if (this.parryStacks < 0){
+            this.parryStacks = 0;
         }
     }
 
-    public void setMaxInstability(double maxInstability) {
-        this.maxInstability = maxInstability;
+
+    public void setIsAlive(boolean isAlive) {
+        this.isAlive = isAlive;
     }
-    public void setInstability(double instability) {
+
+
+    public void setCharInstability(double charInstability){
+        this.charInstability = charInstability;
+    }
+    public void addCharInstability(double charInstability){
+        this.charInstability += charInstability;
+    }
+    public void setIsUnstable(boolean isUnstable) {
+        this.isUnstable = isUnstable;
+    }
+     public void setInstability(double instability) {
         this.instability = instability;
-        if (this.instability >= this.maxInstability) {
+        if (this.instability >= this.charInstability) {
             this.isUnstable = true;
         } else {
             this.isUnstable = false;
@@ -76,7 +129,7 @@ public class character {
     }
     public void addInstability(double instability) {
         this.instability += instability;
-        if (this.instability >= this.maxInstability) {
+        if (this.instability >= this.charInstability) {
             this.isUnstable = true;
         } else {
             this.isUnstable = false;
@@ -87,33 +140,128 @@ public class character {
         if (this.instability < 0) {
             this.instability = 0;
         }
-        if (this.instability >= this.maxInstability) {
+        if (this.instability >= this.charInstability) {
             this.isUnstable = true;
         } else {
             this.isUnstable = false;
         }
     }
-
-
-
-    public void setParryStacks(int parryStacks) {
-        this.parryStacks = parryStacks;
+   public character(){}
+   
+    public character(int charHp, int charSpeed, int charInstabilty){
+        this.charHp = charHp;
+        this.charSpeed = charSpeed;
+        this.charInstability = charInstabilty;
     }
-    public void addParryStacks(int parryStacks) {
-        this.parryStacks += parryStacks;
-    }
-
-    public void setIsUnstable(boolean isUnstable) {
-        this.isUnstable = isUnstable;
-    }
-    public void setIsAlive(boolean isAlive) {
-        this.isAlive = isAlive;
-    }
-
-    public void CharReset(){
+    //reset
+    public void charReset(){
         setIsAlive(true);
         setParryStacks(0);
         setInstability(0);
-        setHp(maxHp);
+        setSpeed(charSpeed);
+        setHp(charHp);
+        setJustHit(false);
     }
+//#endregion
+
+
+//#region attack char
+    private boolean isParrying = false; 
+    private boolean justSucecessfulParried = false;
+    private boolean justUnsuccessfulParried = false;
+
+    //getters
+    public boolean getIsParrying(){
+        return isParrying; 
+    }
+    public boolean getJustSucecessfulParried(){
+        return justSucecessfulParried;
+    }
+    public boolean getJustSucessfulParried(){
+        return justSucecessfulParried;
+    }
+
+    //can you parry
+    public boolean canParry(){
+        if (!isParrying){
+            return true;
+        }
+        return false;
+    }
+  
+    //if parry succesful
+    public void successfulParry(){
+        addParryStacks(1);
+        double instability = getInstability() + 10;
+
+        if (instability >= getCharInstability()){
+            instability = getCharInstability() - .1;
+        }
+
+        setInstability(instability);
+        addParryStacks(1);
+
+        boolean isParrying = false;
+        boolean justSuccessfulParried = true;
+    }
+
+    public void unsuccesfulParry(){
+        double instability = getInstability() + 20;
+        addInstability(instability);
+        boolean isParrying = false; 
+        justUnsuccessfulParried = true;
+        
+    }
+
+    //constructor
+    public void parry(){}
+
+    //reset
+    public void parryReset(){
+        isParrying = false;
+        justUnsuccessfulParried = false;
+        justSucecessfulParried = false;
+    }
+
+    //#endregion
+
+
+//#region defense char
+    private boolean isCountering = false;
+    private boolean justCountered = false;
+ 
+    //setters counter
+    public void setIsCountering(boolean isCountering){
+        this.isCountering = isCountering;
+    }
+    public void setJustCountered(boolean justCountered){
+        this.justCountered = justCountered;
+    }
+
+    //getters counter
+    public boolean getIsCountering(){
+        return isCountering;
+    }
+    public boolean getJustCountered(){
+        return justCountered;
+    }
+
+
+    //checks if counterattack is possible
+    public boolean canCounter(){
+        if ((!getJustCountered()) && (getParryStacks() >= 1) && (!getIsUnstable())){
+            setJustCountered(true);;
+            return true;
+        }
+        return false;
+    }
+
+    //reset
+    public void counterReset(){
+        isCountering = false;
+        justCountered = false;
+    }
+//#endregion
+
+
 }
