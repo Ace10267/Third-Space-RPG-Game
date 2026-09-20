@@ -1,6 +1,6 @@
 package attacks;
 
-import enemies.Enemy;
+import characters.Character;
 
 public class Attack{
 
@@ -31,11 +31,11 @@ public class Attack{
     }
 
 
-    public void attackHitEnemy(Attack attack, Enemy enemy){
+    public void attackHitEnemy(Attack attack, Character victim){
         int damage = attack.getDamage();
         int enrage = attack.getEnrage();
-        enemy.removeHp(damage);
-        enemy.addEnrage(enrage);
+        victim.removeHp(damage);
+        victim.addEnrage(enrage);
     }
 
 

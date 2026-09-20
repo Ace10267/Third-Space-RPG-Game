@@ -1,7 +1,7 @@
 package attacks;
 
 import java.util.ArrayList;
-
+import attacks.Attack;
 public class AttackListAlly {
     
     private ArrayList<Attack> attacks = new ArrayList<Attack>();
