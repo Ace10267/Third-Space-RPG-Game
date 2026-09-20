@@ -1,6 +1,6 @@
-package combat.attacks;
+package nonScripts.combat.attacks;
 
-import combat.characters.Character;
+import nonScripts.combat.characters.Character;
 
 public class Attack{
 

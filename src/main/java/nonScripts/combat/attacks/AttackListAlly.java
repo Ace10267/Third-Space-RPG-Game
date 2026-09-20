@@ -1,6 +1,6 @@
-package combat.attacks;
+package nonScripts.combat.attacks;
 import java.util.ArrayList;
-import combat.attacks.Attack;
+import nonScripts.combat.attacks.Attack;
 public class AttackListAlly {
     
     private ArrayList<Attack> attacks = new ArrayList<Attack>();
